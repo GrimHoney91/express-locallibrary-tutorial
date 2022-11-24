@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const dotenv = require('dotenv');
+dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,8 +16,7 @@ const helmet = require('helmet');
 var app = express();
 
 const mongoose = require('mongoose');
-const dev_db_url = "mongodb+srv://mdnGrim:mdnHoney@cluster0.eelmgc2.mongodb.net/local_library?retryWrites=true&w=majority";
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
